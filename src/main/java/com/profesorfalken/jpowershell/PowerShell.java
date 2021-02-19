@@ -52,7 +52,7 @@ public class PowerShell implements AutoCloseable {
 
     //Default PowerShell executable path
     private static final String DEFAULT_WIN_EXECUTABLE = "powershell.exe";
-    private static final String DEFAULT_LINUX_EXECUTABLE = "powershell";
+    private static final String DEFAULT_LINUX_EXECUTABLE = "pwsh";
 
     // Config values
     private int waitPause = 5;
@@ -404,7 +404,7 @@ public class PowerShell implements AutoCloseable {
                     Logger.getLogger(PowerShell.class.getName()).log(Level.INFO,
                             "Forcing PowerShell to close. PID: " + this.pid);
                     try {
-                        Runtime.getRuntime().exec("taskkill.exe /PID " + pid + " /F /T");
+                        Runtime.getRuntime().exec("kill -9 " + pid);
                         this.closed = true;
                     } catch (IOException e) {
                         Logger.getLogger(PowerShell.class.getName()).log(Level.SEVERE,
